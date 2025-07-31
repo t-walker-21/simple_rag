@@ -14,14 +14,14 @@ You must inject your own openAI API key into the environment
 This CLI breaks down the RAG process into a query flow and embedding flow.
 ### Embedding
 To embed a corpus of text (text file), run:
-python main.py --embed path_to_your_text_file.txt --embeddings path_to_your_embedded_content.json
+`python main.py --embed path_to_your_text_file.txt --embeddings path_to_your_embedded_content.json`
 
 This creates a json containing chunks of text with their corresponding LLM embeddings
 
 ### Query
 To ask a question with your embeddings as the grounding context, run:
 
-python main.py --query "Why does an airplane stall?" --embeddings pilot_handbook_aeronautical_knowledge_embeddings.json
+`python main.py --query "Why does an airplane stall?" --embeddings pilot_handbook_aeronautical_knowledge_embeddings.json`
 
 You should see answer answer, along with the context like:
 
