@@ -6,7 +6,7 @@ class Asker:
         self.openai_client = OpenAI()
         self.context = ""
 
-        self.set_context("Allie is the wife of Tevon. She is a sales person. She enjoys playing guitar and crafting. Maddox is their son. He is 18 months old and likes to play with balls. Tevon is a mechanical engineer that enjoys soccer and aviation.")
+        #self.set_context("Allie is the wife of Tevon. She is a sales person. She enjoys playing guitar and crafting. Maddox is their son. He is 18 months old and likes to play with balls. Tevon is a mechanical engineer that enjoys soccer and aviation.")
 
     def ask(self, question: str):
         response = self.openai_client.responses.create(
