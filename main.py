@@ -48,8 +48,10 @@ def main():
 
         asker.set_context(" ".join([chunk for _, chunk in chunk_scores]))
         response, context = asker.ask(args.query)
-        logger.debug(f"Response generated: {response}")
+        print ("##########")
+        print(f"Response to query '{args.query}':\n")
         print(response)
+        print ("##########")
         print(f"Context used: {context}")
 
     if args.embed:
