@@ -1,6 +1,7 @@
 import argparse
 import yaml
 import numpy as np
+import time
 
 from src.config.logging import logger
 from src.rag_asker.asker import Asker
@@ -33,6 +34,7 @@ def main():
 
         chunk_scores = []
 
+        start_time = time.time()
         for embedding, chunk in zip(corpus_embeddings, chunks):
             embedding = np.array(embedding)
             similarity = np.dot(query_embedding, embedding) / (np.linalg.norm(query_embedding) * np.linalg.norm(embedding))
@@ -42,6 +44,8 @@ def main():
 
         # Get top 3 most similar chunks
         chunk_scores = sorted(chunk_scores, key=lambda x: x[0], reverse=True)[:3]
+        end_time = time.time()
+        logger.info(f"Time taken for similarity computation: {end_time - start_time} seconds")
 
         asker.set_context(" ".join([chunk for _, chunk in chunk_scores]))
         response, context = asker.ask(args.query)
