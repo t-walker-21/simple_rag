@@ -1,7 +1,7 @@
 from openai import OpenAI
 
 class Asker:
-    def __init__(self, model:str ="text-embedding-ada-002"):
+    def __init__(self, model:str):
         self.model = model
         self.openai_client = OpenAI()
         self.context = ""

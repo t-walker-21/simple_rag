@@ -1,7 +1,7 @@
 from openai import OpenAI
 
 class Embedder:
-    def __init__(self, model_name: str="text-embedding-ada-002"):
+    def __init__(self, model_name: str):
         self.model_name = model_name
         self.openai_client = OpenAI()
 

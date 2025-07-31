@@ -17,10 +17,11 @@ def main():
 
     with open("src/config/llm.yaml", "r") as config_file:
         config = yaml.safe_load(config_file)
-        model = config.get("asker_model", "gpt-4.1")
+        asker_model_name = config.get("asker_model", "gpt-4.1")
+        embedder_model_name = config.get("embedder_model", "text-embedding-ada-002")
 
-    asker = Asker(model=model)
-    embedder = Embedder()
+    asker = Asker(model=asker_model_name)
+    embedder = Embedder(model_name=embedder_model_name)
 
     if args.query:
         logger.info(f"Received query: {args.query}")
@@ -38,8 +39,6 @@ def main():
         for embedding, chunk in zip(corpus_embeddings, chunks):
             embedding = np.array(embedding)
             similarity = np.dot(query_embedding, embedding) / (np.linalg.norm(query_embedding) * np.linalg.norm(embedding))
-            #logger.debug(f"Similarity score: {similarity}")
-            #print (f"Similarity score: {similarity} for chunk: {chunk}")
             chunk_scores.append((similarity, chunk))
 
         # Get top 3 most similar chunks
@@ -56,15 +55,8 @@ def main():
     if args.embed:
         logger.info(f"Received embed request: {args.embed}")
 
-        chunks = file_to_chunks(args.embed, chunk_size=300, overlap=100)
-
-        #for chunk in chunks:
-            #print (f"Chunk: {chunk}")
-
-        
+        chunks = file_to_chunks(args.embed, chunk_size=300, overlap=100)        
         embeddings = [embedder.embed(chunk) for chunk in chunks]
-        logger.debug(f"Generated embeddings: {embeddings}")
-        #print(embeddings)
 
         embeddings_to_file(embeddings, chunks, args.embeddings)
 
