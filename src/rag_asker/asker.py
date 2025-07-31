@@ -1,14 +1,14 @@
 from openai import OpenAI
 
 class Asker:
-    def __init__(self, model:str):
-        self.model = model
+    def __init__(self, model_name:str):
+        self.model_name = model_name
         self.openai_client = OpenAI()
         self.context = ""
 
     def ask(self, question: str):
         response = self.openai_client.responses.create(
-            model=self.model,
+            model=self.model_name,
             input=[
                 {"role": "user", "content": question},
                 {"role": "system", "content": f"You are a helpful assistant for answering question based on the provided context. Please provide a concise and accurate answer, and if the context is not sufficient, say so and ask for more context. Here is your context: {self.context}"}

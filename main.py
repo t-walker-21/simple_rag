@@ -20,7 +20,7 @@ def main():
         asker_model_name = config.get("asker_model", "gpt-4.1")
         embedder_model_name = config.get("embedder_model", "text-embedding-ada-002")
 
-    asker = Asker(model=asker_model_name)
+    asker = Asker(model_name=asker_model_name)
     embedder = Embedder(model_name=embedder_model_name)
 
     if args.query:
